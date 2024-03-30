@@ -1,8 +1,9 @@
 
+import "./layout.scss";
 
 function App() {
   return (
-    <div>Hello React Real eState App</div>
+    <div className="layout">Hello React Real eState App</div>
   )
 }
 
