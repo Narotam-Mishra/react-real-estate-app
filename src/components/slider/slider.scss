@@ -16,6 +16,7 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
+        z-index: 999;
 
         .arrow{
             flex: 1;
@@ -26,6 +27,14 @@
             img{
                 width: 50px;
 
+                @include md{
+                    width: 30px;
+                }
+
+                @include sm{
+                    width: 20px;
+                }
+    
                 &.right{
                     transform: rotate(180deg);
                 }
