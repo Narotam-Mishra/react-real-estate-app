@@ -1,5 +1,5 @@
 
-## [React Real Estate App]
+## [React Real Estate App]()
 - Welcome to the React Real Estate App. This application is designed to showcase properties, provide detailed listings, and offer user profiles for a seamless real estate browsing experience.
 
 ### Features
@@ -26,8 +26,8 @@
 
 - To get a local copy of the project up and running, follow these steps :-
 
-1). Clone this repository to your local machine.
-2). Install dependencies by running `npm install` in the project directory.
-3). Start the development server with `npm run dev`.
-4). Open  http://localhost:5173/ to view the app in your browser.
+1. Clone this repository to your local machine.
+2. Install dependencies by running `npm install` in the project directory.
+3. Start the development server with `npm run dev`.
+4. Open  http://localhost:5173/ to view the app in your browser.
 
