@@ -8,6 +8,8 @@ import ListPage from "./pages/listPage/ListPage";
 import Layout from "./pages/layout/Layout";
 import SinglePage from "./pages/singlePage/SinglePage";
 import ProfilePage from "./pages/profilePage/ProfilePage";
+import Login from "./pages/login/Login";
+import Register from "./pages/register/Register";
 
 function App() {
 
@@ -27,6 +29,14 @@ function App() {
         {
           path: "/:id",
           element: <SinglePage />,
+        },
+        {
+          path: "/login",
+          element: <Login />,
+        },
+        {
+          path: "/register",
+          element: <Register />,
         },
         {
           path: "/profile",
