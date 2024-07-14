@@ -1,5 +1,5 @@
 import './Login.scss'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './Login.scss';
 import { useState } from 'react';
 import apiRequest from '../../lib/apiRequest';
@@ -8,7 +8,7 @@ const Login = () => {
   const[error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
-  // const navigate = useNavigate()
+  const navigate = useNavigate()
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -23,16 +23,19 @@ const Login = () => {
     // console.log("Username:", username, "password: ", password)
 
     try {
-      const res = await apiRequest.post("/auth/login", {
+      const response = await apiRequest.post("/auth/login", {
         username, 
         password,
       });
 
-      console.log(res);
-      // navigate("/login")
+      localStorage.setItem("user", JSON.stringify(response.data));
+      // console.log(response);
+
+      // once login successful, redirect user to home page
+      navigate("/")
     } catch (err) {
       console.log("Error while login:", err);
-      setError(err.message);
+      setError(err.response.data.message);
     } finally{
       setIsLoading(false);
     }

@@ -1,8 +1,25 @@
+import { useNavigate } from 'react-router-dom';
 import Chat from '../../components/chat/Chat';
 import List from '../../components/list/List';
+import apiRequest from '../../lib/apiRequest';
 import './ProfilePage.scss';
 
 const ProfilePage = () => {
+  const navigate = useNavigate()
+
+  const handleLogout = async () => {
+    try {
+      const response = await apiRequest.post("/auth/logout")
+      
+      // once user's logout clear user's details from local storage
+      localStorage.removeItem("user");
+
+      // then navigate user back to home page
+      navigate("/")
+    } catch (error) {
+      console.log("Error while logout:", error);
+    }
+  }
   return (
     <div className="profilePage">
       <div className="details">
@@ -21,6 +38,7 @@ const ProfilePage = () => {
             </span>
             <span>Username: <b>John Doe</b></span>
             <span>E-mail: <b>john@gmail.com</b></span>
+            <button onClick={handleLogout}>Logout</button>
           </div>
           <div className="title">
             <h1>My List</h1>
