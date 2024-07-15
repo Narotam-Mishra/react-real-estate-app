@@ -1,12 +1,15 @@
 import './Login.scss'
 import { Link, useNavigate } from 'react-router-dom';
 import './Login.scss';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import apiRequest from '../../lib/apiRequest';
+import { AuthContextVal } from '../../context/AuthContext';
 
 const Login = () => {
   const[error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+
+  const { updateUser } = useContext(AuthContextVal)
 
   const navigate = useNavigate()
 
@@ -28,8 +31,9 @@ const Login = () => {
         password,
       });
 
-      localStorage.setItem("user", JSON.stringify(response.data));
+      // localStorage.setItem("user", JSON.stringify(response.data));
       // console.log(response);
+      updateUser(response.data)
 
       // once login successful, redirect user to home page
       navigate("/")
