@@ -3,13 +3,19 @@ import Chat from '../../components/chat/Chat';
 import List from '../../components/list/List';
 import apiRequest from '../../lib/apiRequest';
 import './ProfilePage.scss';
-import { useContext } from 'react';
-import AuthContext from '../../context/AuthContext';
+import { useContext, useEffect } from 'react';
+import { AuthContextVal }  from '../../context/AuthContext';
 
 const ProfilePage = () => {
-  const { currentUser, updateUser } = useContext(AuthContext)
+  const { updateUser, currentUser } = useContext(AuthContextVal)
 
   const navigate = useNavigate()
+
+  useEffect(() => {
+    if(!currentUser){
+      navigate("/login")
+    }
+  }, [currentUser, navigate])
 
   const handleLogout = async () => {
     try {
@@ -26,7 +32,7 @@ const ProfilePage = () => {
     }
   }
   return (
-    <div className="profilePage">
+    currentUser && <div className="profilePage">
       <div className="details">
         <div className="wrapper">
           <div className="title">
