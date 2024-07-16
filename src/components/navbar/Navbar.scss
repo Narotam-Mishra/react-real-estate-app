@@ -1,10 +1,10 @@
 @import "../../responsive.scss";
 
 nav{
+    height: 100px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 100px;
 
     a{
         transition: all 0.4s ease;
@@ -63,7 +63,7 @@ nav{
             padding: 12px 24px;
             margin: 20px;
             z-index: 101;
-            cursor: pointer;
+            // cursor: pointer;
         }
 
         .user{

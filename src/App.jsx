@@ -5,11 +5,12 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import ListPage from "./pages/listPage/ListPage";
-import Layout from "./pages/layout/Layout";
+import { Layout, RequireAuth } from "./pages/layout/Layout";
 import SinglePage from "./pages/singlePage/SinglePage";
 import ProfilePage from "./pages/profilePage/ProfilePage";
 import Login from "./pages/login/Login";
 import Register from "./pages/register/Register";
+import ProfileUpdatePage from "./pages/profileUpdatePage/profileUpdatePage";
 
 function App() {
 
@@ -38,9 +39,19 @@ function App() {
           path: "/register",
           element: <Register />,
         },
+      ],
+    },
+    {
+      path: "/",
+      element: <RequireAuth />,
+      children: [
         {
           path: "/profile",
           element: <ProfilePage />,
+        },
+        {
+          path: "/profile/update",
+          element: <ProfileUpdatePage />,
         },
       ],
     },
