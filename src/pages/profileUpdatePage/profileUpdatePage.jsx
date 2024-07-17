@@ -1,15 +1,15 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable react-hooks/rules-of-hooks */
+
 import { useContext, useState } from 'react';
 import './profileUpdatePage.scss'
 import { AuthContextVal } from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import apiRequest from '../../lib/apiRequest';
+import UploadWidget from '../../components/uploadWidget/UploadWidget';
 
 const ProfileUpdatePage = () => {
   const { currentUser, updateUser } = useContext(AuthContextVal);
   const [error, setError] = useState("");
-  const [avatar, setAvatar] = useState([]);
+  const [avatar, setAvatar] = useState(currentUser.avatar);
 
   const navigate = useNavigate();
 
@@ -24,7 +24,7 @@ const ProfileUpdatePage = () => {
         username,
         email,
         password,
-        avatar:avatar[0]
+        avatar,
       });
       updateUser(res.data);
       navigate("/profile");
@@ -34,8 +34,8 @@ const ProfileUpdatePage = () => {
     }
   };
   return (
-    <div className='profileUpdatePage'>
-        <div className="formContainer">
+    <div className="profileUpdatePage">
+      <div className="formContainer">
         <form onSubmit={handleSubmit}>
           <h1>Update Profile</h1>
           <div className="item">
@@ -65,20 +65,24 @@ const ProfileUpdatePage = () => {
         </form>
       </div>
       <div className="sideContainer">
-        <img src={avatar[0] || currentUser.avatar || "/noavatar.jpg"} alt="" className="avatar" />
-        {/* <UploadWidget
+        <img
+          src={avatar || currentUser.avatar || "/noavatar.jpg"}
+          alt=""
+          className="avatar"
+        />
+        <UploadWidget
           uwConfig={{
-            cloudName: "lamadev",
-            uploadPreset: "estate",
+            cloudName: "daxn9i2xp",
+            uploadPreset: "react-estate",
             multiple: false,
             maxImageFileSize: 2000000,
             folder: "avatars",
           }}
           setState={setAvatar}
-        /> */}
+        />
       </div>
     </div>
-  )
+  );
 }
 
 export default ProfileUpdatePage

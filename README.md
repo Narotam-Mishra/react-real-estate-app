@@ -31,3 +31,4 @@
 3. Start the development server with `npm run dev`.
 4. Open  http://localhost:5173/ to view the app in your browser.
 
+## [React image and video upload](https://cloudinary.com/documentation/react_image_and_video_upload)
