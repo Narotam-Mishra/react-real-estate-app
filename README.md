@@ -34,3 +34,5 @@
 ## [React image and video upload](https://cloudinary.com/documentation/react_image_and_video_upload)
 
 ## [React Router](https://reactrouter.com/en/main)
+
+## [React Router Defer Data Guide](https://reactrouter.com/en/main/utils/defer)
