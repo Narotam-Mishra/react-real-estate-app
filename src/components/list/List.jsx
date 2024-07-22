@@ -1,12 +1,13 @@
+/* eslint-disable react/prop-types */
 
-import { listData } from '../../lib/dummyData'
+// import { listData } from '../../lib/dummyData'
 import Card from '../card/Card'
 import './List.scss'
 
-const List = () => {
+const List = ({ posts }) => {
   return (
     <div className="list">
-      {listData.map((item) => (
+      {posts.map((item) => (
         <Card key={item.id} item={item} />
       ))}
     </div>
