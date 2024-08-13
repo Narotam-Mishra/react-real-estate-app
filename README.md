@@ -36,3 +36,5 @@
 ## [React Router](https://reactrouter.com/en/main)
 
 ## [React Router Defer Data Guide](https://reactrouter.com/en/main/utils/defer)
+
+## [Real Time chatting using Socket][https://socket.io/]
