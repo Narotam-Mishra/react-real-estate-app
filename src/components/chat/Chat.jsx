@@ -5,16 +5,17 @@ import './Chat.scss';
 import { AuthContextVal } from '../../context/AuthContext';
 import apiRequest from '../../lib/apiRequest';
 import { format } from 'timeago.js';
+import { SocketContext } from '../../context/SocketContext';
 
 const Chat = ({ chats }) => {
   const[chat, setChat] = useState(null);
   const { currentUser } = useContext(AuthContextVal);
-
+  const { socket } = useContext(SocketContext);
   // console.log(chats)
 
   const handleOpenChat = async (id, receiver) => {
     try {
-      const res = await apiRequest("/chats" + id);
+      const res = await apiRequest("/chats/" + id);
       setChat({...res.data, receiver});
     } catch (error) {
       console.log("Error while opening chat window:", error)
@@ -29,13 +30,18 @@ const Chat = ({ chats }) => {
     if(!text) return;
 
     try {
-      const res = apiRequest.post("/messages/" + chat.id, { text });
+      const res = await apiRequest.post("/messages/" + chat.id, { text });
       setChat(prev => ({ ...prev, messages:[...prev.messages, res.data] }));
       e.target.reset();
+      socket.emit("sendMessage", {
+        receiverId : chat.receiver.id,
+        data: res.data,
+      })
     } catch (error) {
       console.log("Error while submitting chat:", error);
     }
   }
+
   return (
     <div className="chat">
       <div className="messages">

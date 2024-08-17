@@ -2,20 +2,20 @@
 import { createContext, useEffect, useState } from "react"
 import { io } from "socket.io-client"
 
-export const SocketContextVal = createContext();
+export const SocketContext = createContext();
 
-const SocketContext = ({ children }) => {
+const SocketContextProvider = ({ children }) => {
   const [socket, setSocket] = useState(null);
 
   useEffect(() => {
-    setSocket(io("http://localhost:4241"))
+    setSocket(io("http://localhost:4341"));
   }, []);
 
   return (
-    <SocketContextVal.Provider value={{ socket }}>
+    <SocketContext.Provider value={{ socket }}>
       {children}
-    </SocketContextVal.Provider>
+    </SocketContext.Provider>
   );
 };
 
-export default SocketContext
+export default SocketContextProvider
