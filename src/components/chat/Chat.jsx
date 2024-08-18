@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import './Chat.scss';
 import { AuthContextVal } from '../../context/AuthContext';
 import apiRequest from '../../lib/apiRequest';
@@ -12,6 +12,12 @@ const Chat = ({ chats }) => {
   const { currentUser } = useContext(AuthContextVal);
   const { socket } = useContext(SocketContext);
   // console.log(chats)
+
+  const messageEndRef = useRef()
+
+  useEffect(() => {
+    messageEndRef.current?.scrollIntoView({ behavior: "smooth" })
+  })
 
   const handleOpenChat = async (id, receiver) => {
     try {
@@ -121,6 +127,8 @@ const Chat = ({ chats }) => {
                 <span>{format(message.createdAt)}</span>
               </div>
             ))}
+
+            <div ref={messageEndRef}></div>
           </div>
           <form onSubmit={handleSubmit} className="bottom">
             <textarea name='text'></textarea>
