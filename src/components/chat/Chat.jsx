@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import './Chat.scss';
 import { AuthContextVal } from '../../context/AuthContext';
 import apiRequest from '../../lib/apiRequest';
@@ -42,6 +42,30 @@ const Chat = ({ chats }) => {
     }
   }
 
+  // listen to socket event (for chatting back)
+  useEffect(() => {
+    const readChat = async () => {
+      try {
+        await apiRequest.put("/chats/read/" + chat.id);
+      } catch (error) {
+        console.log("Error while chatting back:", error);
+      }
+    }
+
+    if(chat && socket){
+      socket.on("getMessage", (data) => {
+        if(chat.id === data.chatId){
+          setChat(prev => ({ ...prev, messages:[...prev.messages, data] }));
+          readChat();
+        }
+      })
+    }
+
+    return () => {
+      socket.off("getMessage");
+    };
+  }, [socket, chat])
+
   return (
     <div className="chat">
       <div className="messages">
@@ -51,7 +75,7 @@ const Chat = ({ chats }) => {
             className="message"
             key={c.id}
             style={{
-              backgroundColor: c.seenBy.includes(currentUser.id)
+              backgroundColor: c.seenBy.includes(currentUser.id) || chat?.id === c.id
                 ? "white"
                 : "#fecd514e",
             }}
