@@ -37,6 +37,6 @@
 
 ## [React Router Defer Data Guide](https://reactrouter.com/en/main/utils/defer)
 
-## [Real Time chatting using Socket][https://socket.io/]
+## [Real Time chatting using Socket](https://socket.io/)
 
 ### [Zustand](https://zustand.docs.pmnd.rs/getting-started/introduction)
